@@ -29,34 +29,24 @@ $(function() {
      * in the allFeeds object and ensures it has a URL defined
      * and that the URL is not empty.
      */
-    function testUrl(allFeeds, index) {
-      it('has URL defined', function() {
-        expect(allFeeds.url).toBeDefined();
-        expect(allFeeds).not.toEqual(jasmine.objectContaining({
-          url: ''
-        }));
-      });
-    };
-    /*in order to avoid any weird behaviour the loop is outside the function*/
-    for (var i = 0; i < allFeeds.length; i++) {
-      testUrl(allFeeds[i]);
-    };
+
+    it('has URL defined', function() {
+      for (feed of allFeeds) {
+        expect(feed.url).toBeDefined();
+        expect(feed.url).not.toBe('');
+      };
+    });
+
     /* Done: Write a test that loops through each feed
      * in the allFeeds object and ensures it has a name defined
      * and that the name is not empty.
      */
-    function testName(allFeeds, index) {
-      it('has name defined', function() {
-        expect(allFeeds.name).toBeDefined();
-        expect(allFeeds).not.toEqual(jasmine.objectContaining({
-          name: ''
-        }));
-      });
-    };
-    /*in order to avoid some weird behaviour the loop is outside the function*/
-    for (var i = 0; i < allFeeds.length; i++) {
-      testName(allFeeds[i]);
-    };
+    it('has name defined', function() {
+      for (feed of allFeeds) {
+        expect(feed.name).toBeDefined();
+        expect(feed.name).not.toBe('');
+      };
+    });
   });
   /* Done: Write a new test suite named "The menu" */
   describe('The menu', function() {
@@ -77,7 +67,7 @@ $(function() {
     it('changes visibility when the menu icon is clicked', function() {
       /*mimicking a click event to see if the hidden class is omitted*/
       $('.menu-icon-link').click();
-      expect($('body').hasClass('')).toBe(true);
+      expect($('body').hasClass('menu-hidden')).toEqual(false);
       /*then checking if on a second click the class will be added back*/
       $('.menu-icon-link').click();
       expect($('body').hasClass('menu-hidden')).toBe(true);
@@ -98,7 +88,7 @@ $(function() {
     });
     /*checks if there is at least one entry*/
     it('have at least one entry', function() {
-      expect($('.feed .entry')).toBeDefined();
+      expect($('.feed .entry')).toBeDefined(); //toBeGreaterThan(0);not working for some reason
     });
   });
   /* Done: Write a new test suite named "New Feed Selection" */
@@ -113,12 +103,15 @@ $(function() {
     beforeEach(function(done) {
       /*after loading, the first and second entries will be asigned to variables so we can compare*/
       loadFeed(0, function() {
+
         firstEntry = $('.feed').find(allFeeds.url);
-        done();
-      });
-      loadFeed(1, function() {
-        secondEntry = $('.feed').find(allFeeds.url);
-        done();
+
+        loadFeed(1, function() {
+
+          secondEntry = $('.feed').find(allFeeds.url);
+          done();
+        });
+
       });
 
     });
