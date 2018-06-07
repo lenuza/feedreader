@@ -25,7 +25,7 @@ $(function() {
       expect(allFeeds).toBeDefined();
       expect(allFeeds.length).not.toBe(0);
     });
-    /* TODO: Write a test that loops through each feed
+    /* Done: Write a test that loops through each feed
      * in the allFeeds object and ensures it has a URL defined
      * and that the URL is not empty.
      */
@@ -37,11 +37,11 @@ $(function() {
         }));
       });
     };
-    /*in order to avaoid some weird behaviour the loop is outside the function*/
+    /*in order to avoid any weird behaviour the loop is outside the function*/
     for (var i = 0; i < allFeeds.length; i++) {
       testUrl(allFeeds[i]);
     };
-    /* TODO: Write a test that loops through each feed
+    /* Done: Write a test that loops through each feed
      * in the allFeeds object and ensures it has a name defined
      * and that the name is not empty.
      */
@@ -53,22 +53,22 @@ $(function() {
         }));
       });
     };
-    /*in order to avaoid some weird behaviour the loop is outside the function*/
+    /*in order to avoid some weird behaviour the loop is outside the function*/
     for (var i = 0; i < allFeeds.length; i++) {
       testName(allFeeds[i]);
     };
   });
-    /* TODO: Write a new test suite named "The menu" */
+  /* Done: Write a new test suite named "The menu" */
   describe('The menu', function() {
-    /* TODO: Write a test that ensures the menu element is
+    /* Done: Write a test that ensures the menu element is
      * hidden by default. You'll have to analyze the HTML and
      * the CSS to determine how we're performing the
      * hiding/showing of the menu element.
      */
     it('is hidden by default', function() {
-        expect($('body').hasClass('menu-hidden')).toBe(true);
+      expect($('body').hasClass('menu-hidden')).toBe(true);
     });
-    /* TODO: Write a test that ensures the menu changes
+    /* Done: Write a test that ensures the menu changes
      * visibility when the menu icon is clicked. This test
      * should have two expectations: does the menu display when
      * clicked and does it hide when clicked again.
@@ -78,15 +78,15 @@ $(function() {
       /*mimicking a click event to see if the hidden class is omitted*/
       $('.menu-icon-link').click();
       expect($('body').hasClass('')).toBe(true);
-     /*then checking if on a second click the class will be added back*/
+      /*then checking if on a second click the class will be added back*/
       $('.menu-icon-link').click();
       expect($('body').hasClass('menu-hidden')).toBe(true);
 
     });
   });
-    /* TODO: Write a new test suite named "Initial Entries" */
+  /* Done: Write a new test suite named "Initial Entries" */
   describe('Initial Entries', function() {
-    /* TODO: Write a test that ensures when the loadFeed
+    /* Done: Write a test that ensures when the loadFeed
      * function is called and completes its work, there is at least
      * a single .entry element within the .feed container.
      * Remember, loadFeed() is asynchronous so this test will require
@@ -101,18 +101,16 @@ $(function() {
       expect($('.feed .entry')).toBeDefined();
     });
   });
-    /* TODO: Write a new test suite named "New Feed Selection" */
+  /* Done: Write a new test suite named "New Feed Selection" */
   describe('New Feed Selection', function() {
-    /* TODO: Write a test that ensures when a new feed is loaded
+    /* Done: Write a test that ensures when a new feed is loaded
      * by the loadFeed function that the content actually changes.
      * Remember, loadFeed() is asynchronous.
      */
-     /*set two variables that will be used for comparision*/
+    /*set two variables that will be used for comparision*/
     var firstEntry, secondEntry;
 
     beforeEach(function(done) {
-      /*making sure the .feed container is empty*/ /*do I need to empty it?*/
-      $('.feed').empty();
       /*after loading, the first and second entries will be asigned to variables so we can compare*/
       loadFeed(0, function() {
         firstEntry = $('.feed').find(allFeeds.url);
@@ -124,7 +122,7 @@ $(function() {
       });
 
     });
-
+    /*comparing the two feeds to make sure the content changes*/
     it('is different from the previous one', function() {
       expect(firstEntry).not.toBe(secondEntry);
     });
